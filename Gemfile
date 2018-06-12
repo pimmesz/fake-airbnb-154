@@ -17,8 +17,15 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 
+gem 'devise'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
+
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "awesome_print"
+  gem 'pry-rails'
 end
 
 group :development, :test do
