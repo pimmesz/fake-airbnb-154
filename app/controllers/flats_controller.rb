@@ -2,7 +2,12 @@ class FlatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-     @flats = policy_scope(Flat).order(created_at: :desc)
+    if params[:query].nil? || params[:query].count("a-z") == 0
+      @flats = policy_scope(Flat).order(created_at: :desc)
+    else
+      @flats_all = policy_scope(Flat).order(created_at: :desc)
+      @flats = PgSearch.multisearch(params[:query])
+    end
   end
 
   def show
@@ -45,6 +50,6 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:name, :city)
+    params.require(:flat).permit(:name, :city, :query)
   end
 end
