@@ -3,7 +3,6 @@
 
 <% @flats.each do |flat| %>
 <p>Flatname - <%= flat.name %></p>
-<p>ID - <%= flat.id %></p>
 <%= link_to flat.name, flat_path(flat) %>
 <%= link_to 'Destroy',  flat_path(flat),  method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
