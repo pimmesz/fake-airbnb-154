@@ -1,0 +1,16 @@
+<h1>All flats</h1>
+<% @flats.each do |flat| %>
+<% if params[:query].present? %>
+  <% flat = Flat.find_by_id(flat.searchable_id) %>
+<% end %>
+<div class="col-xs-12 col-sm-4">
+  <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://kitt.lewagon.com/placeholder/cities/<%= flat.city.downcase %>');">
+    <div class="card-category">Popular</div>
+    <div class="card-description">
+      <p><%= link_to flat.name, flat_path(flat) %></p>
+      <p><%= flat.city %></p>
+    </div>
+    <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/<%= %w[Bob Ken Job Frank Charlie Seb].sample %>">
+  </div>
+</div>
+<% end %>

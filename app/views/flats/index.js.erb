@@ -1,0 +1,4 @@
+var searchResults = document.querySelector('#search-results')
+searchResults.innerHTML = ""
+searchResults.insertAdjacentHTML("beforeend", "<%= j render 'flats/search', flats: @flats %>");
+
