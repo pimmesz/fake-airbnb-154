@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   # skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-     @trips = policy_scope(trip).order(created_at: :desc)
+     @trips = policy_scope(Trip).order(created_at: :desc)
   end
 
   def show
@@ -11,12 +11,14 @@ class TripsController < ApplicationController
   end
 
   def new
-    @trip = trip.new
+    @flat = Flat.find(params[:flat_id])
+    @trip = Trip.new
     authorize @trip
   end
 
   def create
     @trip = Trip.create(trip_params)
+    @trip.flat_id = params[:flat_id]
     @trip.user = current_user
     authorize @trip
     @trip.save!
@@ -45,6 +47,10 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name)
+    params.require(:trip).permit(:description, :flat_id)
+  end
+
+  def user_is_owner?
+    current_user.id == Flat.find(params[:flat_id]).user_id
   end
 end

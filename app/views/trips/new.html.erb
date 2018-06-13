@@ -1,2 +1,7 @@
-<h1>Trips#new</h1>
+<h1>trips#new</h1>
 <p>Find me in app/views/trips/new.html.erb</p>
+
+<%= simple_form_for [@flat, @trip] do |f| %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
+<% end %>
