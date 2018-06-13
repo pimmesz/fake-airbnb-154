@@ -1,11 +1,18 @@
-<h1>Flats#index</h1>
-<p>Find me in app/views/flats/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <% @flats.each do |flat| %>
+    <div class="col-xs-12 col-sm-4">
 
-<% @flats.each do |flat| %>
-<p>Flatname - <%= flat.name %></p>
-<p>Flat id - <%= flat.id %></p>
-<%= link_to flat.name, flat_path(flat) %>
-<%= link_to 'Destroy',  flat_path(flat),  method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://kitt.lewagon.com/placeholder/cities/<%= flat.city.downcase %>');">
+        <div class="card-category">Popular</div>
+        <div class="card-description">
+          <p><%= link_to flat.name, flat_path(flat) %></p>
+          <p><%= flat.city %></p>
+        </div>
+        <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/<%= %w[Bob Ken Job Frank Charlie Seb].sample %>">
 
-<p><%= link_to "New flat", new_flat_path %></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

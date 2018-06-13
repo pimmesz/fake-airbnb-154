@@ -3,5 +3,10 @@
 
 <%= @flat.name %>
 
-<%= link_to "Edit", edit_flat_path(@flat) %>
+<% if policy(@flat).update? %>
+  <%= link_to "Edit", edit_flat_path(@flat) %>
+<% end %>
+<% if policy(flat).destroy? %>
+  <p><%= link_to 'Destroy',  flat_path(flat),  method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<% end %>
 <%= link_to "New trip", new_flat_trip_path(@flat) %>
