@@ -8,6 +8,13 @@ class FlatsController < ApplicationController
       @flats_all = policy_scope(Flat).order(created_at: :desc)
       @flats = PgSearch.multisearch(params[:query])
     end
+    @markers = @flats.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude,
+        infoWindow: { content: flat.name }
+      }
+    end
   end
 
   def show
@@ -50,6 +57,6 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:name, :city)
+    params.require(:flat).permit(:name, :city, :address)
   end
 end

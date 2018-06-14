@@ -4,4 +4,7 @@ class Flat < ApplicationRecord
 
   include PgSearch
   multisearchable against: [ :name, :price, :city ]
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end
