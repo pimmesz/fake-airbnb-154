@@ -2,13 +2,20 @@ class FlatsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
+
+    # Set flats being given to index depending on search or no search
     if params[:query].nil? || params[:query].count("a-z") == 0
       @flats = policy_scope(Flat).order(created_at: :desc)
     else
       @flats_all = policy_scope(Flat).order(created_at: :desc)
       @flats = PgSearch.multisearch(params[:query])
     end
+
+    # Set markers on all flats or only on search results
     @markers = @flats.map do |flat|
+    if params[:query].present?
+      flat = Flat.find(flat.searchable_id)
+    end
       {
         lat: flat.latitude,
         lng: flat.longitude,

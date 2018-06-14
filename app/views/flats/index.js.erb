@@ -2,3 +2,6 @@ var searchResults = document.querySelector('#search-results')
 searchResults.innerHTML = ""
 searchResults.insertAdjacentHTML("beforeend", "<%= j render 'flats/search', flats: @flats %>");
 
+var mapInput = document.querySelector('#map-input')
+mapInput.innerHTML = ""
+mapInput.insertAdjacentHTML("beforeend", "<%= j render 'flats/maps', markers: @markers %>");
